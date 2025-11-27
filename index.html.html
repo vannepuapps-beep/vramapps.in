@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VRamApps - App Developer Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #4a6cf7;
+            --primary-dark: #3a57d4;
+            --secondary: #6c757d;
+            --dark: #1d2144;
+            --light: #f8f9fa;
+            --white: #ffffff;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--white);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .section-title p {
+            color: var(--secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary);
+            color: var(--white);
+            border-radius: 5px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 10px;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .logo-text span {
+            color: var(--primary);
+        }
+
+        .nav-menu {
+            display: flex;
+        }
+
+        .nav-menu li {
+            margin-left: 30px;
+        }
+
+        .nav-menu a {
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 150px 0 100px;
+            background: linear-gradient(135deg, #f5f7ff 0%, #e6ebff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hero-text {
+            flex: 1;
+            padding-right: 30px;
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .hero-text h1 span {
+            color: var(--primary);
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 30px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .skill {
+            background-color: var(--light);
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: flex;
+            gap: 50px;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        .contact-details h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+
+        .contact-details p {
+            color: var(--secondary);
+        }
+
+        /* Legal Sections */
+        .legal-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .legal-section {
+            margin-bottom: 40px;
+        }
+
+        .legal-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 8px;
+        }
+
+        .legal-section p {
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+
+        .legal-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .legal-section li {
+            margin-bottom: 8px;
+            color: var(--secondary);
+            list-style-type: disc;
+        }
+
+        .update-date {
+            font-style: italic;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            text-align: center;
+            background-color: var(--light);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo-img {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 10px;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .footer-logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .footer-logo-text span {
+            color: var(--primary);
+        }
+
+        .footer-about p {
+            max-width: 300px;
+            color: #a0a3bd;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .footer-links h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-links h4::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links ul li a {
+            color: #a0a3bd;
+            transition: var(--transition);
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #a0a3bd;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+
+            .hero-content,
+            .about-content,
+            .contact-content {
+                flex-direction: column;
+            }
+
+            .hero-text,
+            .about-text,
+            .contact-info,
+            .contact-form {
+                padding-right: 0;
+                margin-bottom: 40px;
+            }
+
+            .hero-text {
+                text-align: center;
+            }
+
+            .hero-btns {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                flex-direction: column;
+                background-color: var(--white);
+                text-align: center;
+                transition: var(--transition);
+                box-shadow: var(--shadow);
+                padding: 20px 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu li {
+                margin: 15px 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .legal-content {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 250px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo-container">
+                <div class="logo-img">V</div>
+                <a href="#" class="logo-text">VRam<span>Apps</span></a>
+            </div>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#privacy">Privacy</a></li>
+                <li><a href="#terms">Terms</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>Creating <span>Amazing Apps</span> For Everyone</h1>
+                <p>Welcome to VRamApps, where innovative mobile applications meet exceptional user experience. Discover
+                    my portfolio of apps designed to simplify and enhance your digital life.</p>
+                <div class="hero-btns">
+                    <a href="#contact" class="btn">Get In Touch</a>
+                    <a href="#about" class="btn btn-outline">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://cdn.pixabay.com/photo/2020/05/18/16/17/social-media-5187243_1280.png"
+                    alt="App Development">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Me</h2>
+                <p>Learn more about the developer behind VRamApps</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Hi, I'm Ram - App Developer</h3>
+                    <p>I'm a passionate mobile app developer creating innovative
+                        applications for iOS and Android platforms. My journey started with a simple idea: to create
+                        apps that solve real-world problems with elegant solutions.</p>
+                    <p>At VRamApps, I focus on developing user-friendly applications that combine functionality with
+                        beautiful design. I believe in continuous learning and staying updated with the latest
+                        technologies to deliver cutting-edge solutions.</p>
+                    <p>When I'm not coding, you can find me exploring new tech trends, contributing to open-source
+                        projects, or sharing my knowledge through tech blogs and tutorials.</p>
+                    <div class="skills">
+                        <span class="skill">Android Development</span>
+                        <span class="skill">iOS Development</span>
+                        <span class="skill">UI/UX Design</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get In Touch</h2>
+                <p>Have a project in mind or want to collaborate? Let's talk!</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p>vannepuapps@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Policy Section -->
+    <section class="section" id="privacy" style="background-color: var(--light);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Privacy Policy</h2>
+                <p>How we handle your data</p>
+            </div>
+            <div class="legal-content">
+                <div class="update-date">
+                    Effective Date: November 27, 2025
+                </div>
+
+                <div class="legal-section">
+                    <p>This Privacy Policy describes how "Mileage Your Journey" (the "App"), developed by VannepuRam
+                        (the "Developer"), handles your information. Your privacy is important to us.</p>
+                </div>
+
+                <div class="legal-section">
+                    <h3>1. Data Stored Locally on Your Device</h3>
+                    <p>The App is designed to work offline. All the data you create, including your saved vehicles and
+                        journey history, is stored exclusively on your own device's local storage. <strong>We do not
+                            collect, see, or store any of this personal data on our servers.</strong> You have full
+                        control over this data and can delete it at any time from within the app.</p>
+                </div>
+
+                <div class="legal-section">
+                    <h3>2. Data Collected by Third-Party Services</h3>
+                    <p>To provide core functionalities like advertisements and in-app purchases, we use third-party
+                        services that may collect information from you. We are not responsible for the privacy practices
+                        of these services, but we are transparent about their use in our App.</p>
+
+                    <h4>a) Google AdMob</h4>
+                    <p>The free version of our App uses Google AdMob to display advertisements. AdMob is an advertising
+                        service provided by Google. To serve relevant ads, AdMob may collect and use data, including but
+                        not limited to:</p>
+                    <ul>
+                        <li><strong>Device Information:</strong> Such as your device model and operating system.</li>
+                        <li><strong>Device or other IDs:</strong> Including your device's unique Advertising ID.</li>
+                        <li><strong>Approximate Location:</strong> Inferred from your IP address to show geographically
+                            relevant ads.</li>
+                        <li><strong>App Interactions:</strong> Data on how you interact with the ads shown in the App.
+                        </li>
+                    </ul>
+                    <p>For more information on how Google collects and uses this data, please review <a
+                            href="https://policies.google.com/privacy" target="_blank"
+                            rel="noopener noreferrer">Google's Privacy Policy</a>.</p>
+
+                    <h4>b) Google Play Billing</h4>
+                    <p>The App offers an optional one-time in-app purchase to remove advertisements. This transaction is
+                        processed securely through the Google Play Billing service. To manage this purchase, Google
+                        collects necessary data, including:</p>
+                    <ul>
+                        <li><strong>Personal Info:</strong> Your Google Account email address to associate the purchase
+                            with your account.</li>
+                        <li><strong>Financial Info:</strong> Your purchase history to verify your ad-free status and
+                            allow for purchase restoration.</li>
+                    </ul>
+                    <p>We do not have access to your payment information (such as credit card numbers), as this is
+                        handled entirely by Google's secure payment system.</p>
+
+                    <h4>c) Google Translate</h4>
+                    <p>The App uses the Google Translate widget to provide multi-language support. When you use this
+                        feature, the text content of the App may be sent to Google's servers for translation purposes.
+                        This may involve the collection of your IP address and other diagnostic data by Google.</p>
+                </div>
+
+                <div class="legal-section">
+                    <h3>3. Data Deletion</h3>
+                    <p>You have the right to delete your data at any time. Since all your primary data (vehicles,
+                        history) is stored locally on your device, you can delete it using the following methods:</p>
+                    <ul>
+                        <li><strong>In-App Deletion:</strong> Use the "Delete" button for individual vehicles or the
+                            "Clear History" button within the app to remove your data.</li>
+                        <li><strong>System Deletion:</strong> You can uninstall the app from your device, which will
+                            delete all of its locally stored data. Alternatively, you can clear the app's data through
+                            your phone's system settings (Settings > Apps > Mileage Your Journey > Storage > Clear
+                            data).</li>
+                    </ul>
+                </div>
+
+                <div class="legal-section">
+                    <h3>4. Children's Privacy</h3>
+                    <p>This App is not intended for use by anyone under the age of 13. We do not knowingly collect
+                        personally identifiable information from children under 13. If we become aware that a child
+                        under 13 has provided us with personal information, we will take steps to remove such
+                        information.</p>
+                </div>
+
+                <div class="legal-section">
+                    <h3>5. Changes to This Privacy Policy</h3>
+                    <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting
+                        the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically
+                        for any changes.</p>
+                </div>
+
+                <div class="legal-section">
+                    <h3>6. Contact Us</h3>
+                    <p>If you have any questions about this Privacy Policy, you can contact us at:
+                        <strong>vannepuapps@gmail.com</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Terms & Conditions Section -->
+    <section class="section" id="terms">
+        <div class="container">
+            <div class="section-title">
+                <h2>Terms & Conditions</h2>
+                <p>Usage guidelines for our applications</p>
+            </div>
+            <div class="legal-content">
+                <div class="update-date">
+                    Effective Date: November 27, 2025
+                </div>
+
+                <div class="legal-section">
+                    <p>Please read these Terms and Conditions carefully before using the "Mileage Your Journey" mobile
+                        application (the "Service") operated by VannepuRam ("us", "we", or "our").</p>
+                    <p>Your access to and use of the Service is conditioned on your acceptance of and compliance with
+                        these Terms. These Terms apply to all users and others who access or use the Service.</p>
+                    <p>By accessing or using the Service, you agree to be bound by these Terms. If you disagree with any
+                        part of the terms, then you may not access the Service.</p>
+                </div>
+
+                <div class="legal-section">
+                    <h3>1. Description of Service</h3>
+                    <p>"Mileage Your Journey" is a utility application designed to help users calculate vehicle mileage,
+                        fuel costs, and journey estimates. All calculations are estimates and should be used for
+                        informational purposes only.</p>
+                </div>
+
+                <div class="legal-section">
+                    <h3>2. In-App Purchases and Advertisements</h3>
+                    <p>The Service is offered free of charge and is supported by advertisements provided by Google
+                        AdMob. We may offer a one-time in-app purchase to remove these advertisements permanently. All
+                        purchases are handled securely through the Google Play Store and are subject to Google's terms
+                        of service.</p>
+                </div>
+
+                <div class="legal-section">
+                    <h3>3. Intellectual Property</h3>
+                    <p>The Service and its original content, features, and functionality are and will remain the
+                        exclusive property of VannepuRam. The Service is protected by copyright and other laws of both
+                        India and foreign countries. Our trademarks may not be used in connection with any product or
+                        service without our prior written consent.</p>
+                </div>
+
+                <div class="legal-section">
+                    <h3>4. Disclaimer of Warranty</h3>
+                    <p>The Service is provided on an "AS IS" and "AS AVAILABLE" basis. The calculations provided by the
+                        App are for estimation purposes only and are not guaranteed to be accurate. We do not warrant
+                        that the results obtained from the use of the Service will be accurate or reliable. You
+                        expressly agree that your use of the Service is at your sole risk.</p>
+                </div>
+
+                <div class="legal-section">
+                    <h3>5. Limitation of Liability</h3>
+                    <p>In no event shall VannepuRam, nor its directors, employees, partners, agents, suppliers, or
+                        affiliates, be liable for any indirect, incidental, special, consequential, or punitive damages,
+                        including without limitation, loss of profits, data, use, goodwill, or other intangible losses,
+                        resulting from your access to or use of or inability to access or use the Service.</p>
+                </div>
+
+                <div class="legal-section">
+                    <h3>6. Governing Law</h3>
+                    <p>These Terms shall be governed and construed in accordance with the laws of India, without regard
+                        to its conflict of law provisions.</p>
+                </div>
+
+                <div class="legal-section">
+                    <h3>7. Changes</h3>
+                    <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. We
+                        will try to provide at least 30 days' notice prior to any new terms taking effect. What
+                        constitutes a material change will be determined at our sole discretion.</p>
+                </div>
+
+                <div class="legal-section">
+                    <h3>8. Contact Us</h3>
+                    <p>If you have any questions about these Terms, please contact us at:
+                        <strong>vannepuapps@gmail.com</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo-container">
+                        <div class="footer-logo-img">V</div>
+                        <div class="footer-logo-text">VRam<span>Apps</span></div>
+                    </div>
+                    <p>Creating innovative mobile applications with exceptional user experience. Let's build something
+                        amazing together.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#terms">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 VRamApps. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.padding = '10px 0';
+                header.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.padding = '20px 0';
+                header.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+            }
+        });
+    </script>
+</body>
+
+</html>
